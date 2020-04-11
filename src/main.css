@@ -6,3 +6,55 @@ h1 {
   font-size: 40px;
   text-align: center;
 }
+
+h2 {
+  color: #222;
+  font-size: 30px;
+}
+
+.reference {
+  margin: 0 auto;
+  width: 1200px;
+  text-align: left;
+}
+.reference a {
+  text-decoration: none;
+  color: #333;
+}
+
+.reference a:hover {
+  text-decoration: underline;
+}
+
+/*
+ * align系は縦
+ * justify-content は横
+ */
+
+.container {
+  margin: 20px auto;
+  background: #8f8;
+  display: flex;
+  width: 1200px;
+  flex-direction: row;
+  /* flex-direction: column; */
+  max-height: 2000px;
+  /* flex-wrap: wrap-reverse; */
+  flex-wrap: wrap;
+  justify-content: center;
+  /* justify-content: space-around; */
+}
+
+#container1 {
+  align-items: baseline;
+  align-content: space-around;
+  height: 700px;
+}
+
+.item {
+  width: 200px;
+  background: #f88;
+  padding: 20px;
+  margin: 10px;
+}
+

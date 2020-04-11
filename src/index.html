@@ -7,6 +7,42 @@
 </head>
 <body>
   <h1>Playground</h1>
+
+  <div class="reference">
+    <h2>references</h2>
+    <ul>
+      <li>
+        <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">https://css-tricks.com/snippets/css/a-guide-to-flexbox/</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container" id="container1">
+    <div class="item">1</div>
+    <div class="item" style="flex-grow: 1;">2</div>
+    <div class="item" style="order: -2;">3(order:-2)</div>
+    <div class="item" style="flex-grow: 2;">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+    <div class="item" style="flex-shrink: 2;">7</div> <!--  flex-wrap: nowrap; のときに積極的に小さくなる  -->
+    <div class="item">8</div>
+    <div class="item">9</div>
+    <div class="item">10</div>
+    <div class="item" style="align-self: flex-;">11</div>
+  </div>
+  
+
+  <div class="container" style="height: 400px;">
+    <div class="item">1</div>
+    <div class="item" style="flex-grow: 1;">2</div>
+    <div class="item" style="order: -2;">3</div>
+    <div class="item" style="align-self: center;">4(center)</div>
+    <div class="item">5</div>
+    <div class="item" style="align-self: flex-start;">6(flex-start)</div>
+    <div class="item" style="align-self: auto;">7(auto)</div>
+    <div class="item" style="align-self: flex-end;">8(flex-end)</div>
+    <div class="item" style="align-self: center;">9(center)</div>
+  </div>
   <script src="main.js"></script>
 </body>
 </html>
