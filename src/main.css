@@ -6,3 +6,68 @@ h1 {
   font-size: 40px;
   text-align: center;
 }
+
+.container {
+  display: grid;
+  /* grid-template-columns: 100px 2fr 1fr; */
+  /* grid-template-rows: 100px 100px;      */
+
+  /* grid-template-columns: repeat(auto-fill, 100px) ; */
+  /* grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) ; */
+  /* grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) ; */
+  /* grid-template-columns: [target-start] 100px 100px 100px [target-end]; */
+  /* grid-template-rows: 100px 100px ; */
+
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(4, 100px);
+  /* grid-auto-flow: column dense;            */
+  grid-auto-columns: 100px;
+  grid-auto-rows: 100px;
+
+  /* grid-template-areas: */
+  /*   "r r r y y"        */
+  /*   "r r r y y"        */
+  /*   "r r r y y"        */
+  /*   "c c g . ."        */
+  /*   "c c b . .";       */
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.container > div {
+  width: 50px;
+  height: 50px;
+  border: solid 1px black;
+}
+
+.box1 {
+  background: hsl(0, 60%, 60%);
+  /* grid-column: 2 / 4; */
+  /* grid-column: 2 / -1; */
+  /* grid-column: 2 / span 2; */
+  /* grid-column: target-start / target-end; */
+  /* grid-column: target; */
+  /* grid-area: r; */
+  align-self: start;
+  justify-self: start;
+}
+
+.box2 {
+  background: hsl(30, 60%, 60%);
+  /* grid-column: span 2; */
+  /* grid-row: span 2;    */
+}
+
+.box3 {
+  background: hsl(60, 60%, 60%);
+}
+
+.box4 {
+  background: hsl(90, 60%, 60%);
+}
+
+.box5 {
+  background: hsl(120, 60%, 60%);
+}
