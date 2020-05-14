@@ -1,40 +1,40 @@
-import { series, parallel, src, dest, watch as gulpWatch } from "gulp";
+import { series, parallel } from "gulp";
 const browserSync = require("browser-sync").create();
-const typescript = require("gulp-typescript");
-const sourcemaps = require("gulp-sourcemaps");
-const gulpEjs = require("gulp-ejs");
-const rename = require('gulp-rename')
-const log = require('fancy-log')
-const del = require('del')
-const destination = "dist/";
 
-export function clean(done) {
-  return del([`${destination}**/*.{js,css,html}`]);
+export function clean() {
+  const del = require("del");
+  return del([`dist/**/*.{js,css,html}`]);
 }
-export function ts(done) {
-  src("src/**/*.ts")
+
+export function ts() {
+  const { src, dest } = require("gulp");
+  const typescript = require("gulp-typescript");
+  const sourcemaps = require("gulp-sourcemaps");
+
+  return src("src/**/*.ts")
     .pipe(sourcemaps.init())
     .pipe(typescript())
     .pipe(sourcemaps.write({ sourceRoot: "./", includeContent: true }))
-    .pipe(dest(destination));
-  done();
+    .pipe(dest("dist"));
 }
-export function css(done) {
-  src("src/**/*.css").pipe(dest(destination));
-  done();
+export function css() {
+  const { src, dest } = require("gulp");
+  return src("src/**/*.css").pipe(dest("dist"));
 }
-export function html(done) {
-  src("src/**/*.html")
-    .pipe(dest(destination));
-  done();
+export function html() {
+  const { src, dest } = require("gulp");
+  return src("src/**/*.html").pipe(dest("dist"));
 }
-export function ejs(done) {
-  src(["src/**/*.ejs", "!**/_*.ejs"])
-    .pipe(gulpEjs())
-    .on('error', log)
-    .pipe(rename({ extname: '.html' }))
-    .pipe(dest(destination))
-  done();
+export function ejs() {
+  const { src, dest } = require("gulp");
+  const ejs = require("gulp-ejs");
+  const log = require("fancy-log");
+  const rename = require("gulp-rename");
+  return src(["src/**/*.ejs", "!**/_*.ejs"])
+    .pipe(ejs())
+    .on("error", log)
+    .pipe(rename({ extname: ".html" }))
+    .pipe(dest("dist"));
 }
 export function reload(done) {
   browserSync.reload();
@@ -43,20 +43,20 @@ export function reload(done) {
 export const all = parallel(ts, css, html, ejs);
 
 export function watch() {
-  gulpWatch("src/**/*.ts", { events: "all" }, series(ts, reload));
-  gulpWatch("src/**/*.css", { events: "all" }, series(css, reload));
-  gulpWatch("src/**/*.html", { events: "all" }, series(html, reload));
-  gulpWatch("src/**/*.ejs", { events: "all" }, series(ejs, reload));
+  const { watch } = require("gulp");
+  watch("src/**/*.ts", { events: "all" }, series(ts, reload));
+  watch("src/**/*.css", { events: "all" }, series(css, reload));
+  watch("src/**/*.html", { events: "all" }, series(html, reload));
+  watch("src/**/*.ejs", { events: "all" }, series(ejs, reload));
 }
-export function server(done) {
+export function server() {
   browserSync.init({
     notify: false,
     server: {
-      baseDir: destination,
+      baseDir: "dist",
     },
   });
-  done();
 }
 
 export const build = series(clean, all);
-export default series(clean, all, server, watch);
+export default series(clean, all, parallel(server, watch));
